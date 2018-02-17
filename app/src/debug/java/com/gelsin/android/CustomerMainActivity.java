@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     MapFragment mapFragment;
     ShopsFragment shopsFragment;
     OrdersFragment ordersFragment;
+    ProfileFragment profileFragment;
     FragmentManager fragmentManager;
     BroadcastReceiver receiver;
     Intent intent;
@@ -54,7 +56,9 @@ public class CustomerMainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.customer_main_container, ordersFragment).commit();
                     break;
                 case R.id.navigation_profile:
-                    // TODO: 17.02.2018 Add Intent to switch user.
+                    if(null == profileFragment)
+                        profileFragment = new ProfileFragment();
+                    fragmentManager.beginTransaction().replace(R.id.customer_main_container, profileFragment).commit();
                     break;
             }
             return true;
@@ -126,5 +130,9 @@ public class CustomerMainActivity extends AppCompatActivity {
         super.onDestroy();
 
         if(null != receiver) unregisterReceiver(receiver);
+    }
+
+    public void goToShopMainActivity(View view) {
+        startActivity(new Intent(this, ShopMainActivity.class));
     }
 }
