@@ -38,9 +38,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
         final OrderItem item = orders.get(position);
 
         if(item.getStatus() == 0)
-            holder.text.setText(context.getString(R.string.waiting_order));
+            holder.title.setText(context.getString(R.string.waiting_order));
         else
-            holder.text.setText(context.getString(R.string.completed_order));
+            holder.title.setText(context.getString(R.string.completed_order));
 
         String products = "";
         for(ProductItem product : item.getProducts())
