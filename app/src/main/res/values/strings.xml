@@ -14,9 +14,12 @@
     <string name="no_nearby_shops_text">You can talk with owners of local shops to use Gelsin.</string>
     <string name="no_orders_title">No orders</string>
     <string name="no_orders_text">You can give an order by selecting a shop on the map.</string>
+    <string name="no_products_title">No products</string>
+    <string name="no_products_text">You can add products to sell.</string>
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="shop_management">Shop Management</string>
     <string name="shop_products">Shop Products</string>
+    <string name="products">Products</string>
     <string name="no_products">No products</string>
     <string name="amount">Amount:</string>
     <string name="successful_order">Your order has been received successfully.</string>

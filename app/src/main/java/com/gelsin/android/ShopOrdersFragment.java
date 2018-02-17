@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * Created by wmramazan on 17.02.2018.
  */
 
-public class OrdersFragment extends Fragment {
+public class ShopOrdersFragment extends Fragment {
 
     private View view;
     private Context context;
@@ -46,7 +46,7 @@ public class OrdersFragment extends Fragment {
         orders = new ArrayList<>();
         //orders.add(new OrderItem("test", "test", "test", 12.21, 123.12));
 
-        GelsinActions.getCustomerOrders(new ResultHandler() {
+        GelsinActions.getShopOrders(new ResultHandler() {
             @Override
             public void handle(String result) {
 
@@ -84,5 +84,4 @@ public class OrdersFragment extends Fragment {
 
         return view;
     }
-
 }

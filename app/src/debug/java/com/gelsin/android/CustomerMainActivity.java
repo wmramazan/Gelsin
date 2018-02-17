@@ -9,20 +9,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gelsin.android.adapter.ShopListAdapter;
-import com.gelsin.android.item.ShopItem;
 import com.google.android.gms.maps.model.LatLng;
-
-import java.util.ArrayList;
 
 public class CustomerMainActivity extends AppCompatActivity {
 
@@ -32,7 +26,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
     MapFragment mapFragment;
     ShopsFragment shopsFragment;
-    OrdersFragment ordersFragment;
+    CustomerOrdersFragment customerOrdersFragment;
     ProfileFragment profileFragment;
     FragmentManager fragmentManager;
     BroadcastReceiver receiver;
@@ -56,9 +50,9 @@ public class CustomerMainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.customer_main_container, shopsFragment).commit();
                     break;
                 case R.id.navigation_orders:
-                    if(null == ordersFragment)
-                        ordersFragment = new OrdersFragment();
-                    fragmentManager.beginTransaction().replace(R.id.customer_main_container, ordersFragment).commit();
+                    if(null == customerOrdersFragment)
+                        customerOrdersFragment = new CustomerOrdersFragment();
+                    fragmentManager.beginTransaction().replace(R.id.customer_main_container, customerOrdersFragment).commit();
                     break;
                 case R.id.navigation_profile:
                     if(null == profileFragment)
