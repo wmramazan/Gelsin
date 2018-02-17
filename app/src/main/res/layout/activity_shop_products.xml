@@ -41,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/shop_products_amount"
+            android:paddingLeft="4dp"
             android:text="Amount: 100 TL"
             android:textSize="16dp"
             android:textColor="@android:color/white"

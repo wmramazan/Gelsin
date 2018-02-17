@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gelsin.android.adapter.ProductListAdapter;
 import com.gelsin.android.item.ProductItem;
@@ -27,7 +28,8 @@ public class ShopProductsActivity extends AppCompatActivity {
 
     private Intent intent;
     private RecyclerView productList;
-    private ArrayList<ProductItem> products, shopping_list;
+    private ArrayList<ProductItem> products;
+    private ArrayList<String> shopping_list;
     private ProductListAdapter productListAdapter;
     private ProgressBar progressBar;
     private TextView productsAmount;
@@ -44,7 +46,7 @@ public class ShopProductsActivity extends AppCompatActivity {
         productList = findViewById(R.id.shop_products);
         progressBar = findViewById(R.id.shop_products_progress);
         productsAmount = findViewById(R.id.shop_products_amount);
-        productsAmount.setText(getString(R.string.amount) + String.valueOf(amount));
+        productsAmount.setText(getString(R.string.amount) + " " + String.valueOf(amount));
 
         products = new ArrayList<>();
         shopping_list = new ArrayList<>();
@@ -65,7 +67,7 @@ public class ShopProductsActivity extends AppCompatActivity {
                     productList.addOnItemTouchListener(new RecyclerTouchListener(ShopProductsActivity.this, productList, new RecyclerTouchListener.ClickListener() {
                         @Override
                         public void onClick(View view, int position) {
-                            shopping_list.add(products.get(position));
+                            shopping_list.add(products.get(position).get_id());
                             amount += products.get(position).getPrice();
 
                             productsAmount.setText(getString(R.string.amount) + " " + String.valueOf(amount));
@@ -87,6 +89,13 @@ public class ShopProductsActivity extends AppCompatActivity {
     }
     
     public void giveOrder(View view) {
-        // TODO: 17.02.2018 Give order
+        Gson gson = new Gson();
+        GelsinActions.giveAnOrder(gson.toJson(shopping_list), new ResultHandler() {
+            @Override
+            public void handle(String result) {
+                Toast.makeText(ShopProductsActivity.this, R.string.successful_order, Toast.LENGTH_SHORT);
+                finish();
+            }
+        });
     }
 }
