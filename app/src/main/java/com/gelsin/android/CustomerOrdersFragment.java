@@ -57,7 +57,7 @@ public class CustomerOrdersFragment extends Fragment {
                     TextView noContent_title = view.findViewById(R.id.itemList_noContent_title);
                     TextView noContent_text = view.findViewById(R.id.itemList_noContent_text);
                     noContent_title.setText(R.string.no_orders_title);
-                    noContent_text.setText(R.string.no_orders_text);
+                    noContent_text.setText(R.string.no_customers_orders_text);
                     view.findViewById(R.id.itemList_noContent).setVisibility(View.VISIBLE);
                 } else {
                     orderList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));

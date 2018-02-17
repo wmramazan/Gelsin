@@ -39,8 +39,9 @@ public class GelsinActions {
         Gelsin.client.get("order/shop/" + SHOP_ID, null, resultHandler);
     }
 
-    public static void giveAnOrder(ArrayList<String> products, ResultHandler resultHandler) {
+    public static void giveAnOrder(String shop_id, ArrayList<String> products, ResultHandler resultHandler) {
         RequestParams params = new RequestParams();
+        params.put("shop", shop_id);
         params.put("customer", CUSTOMER_ID);
         params.put("products", products);
 

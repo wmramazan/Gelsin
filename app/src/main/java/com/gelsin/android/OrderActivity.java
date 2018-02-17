@@ -90,7 +90,7 @@ public class OrderActivity extends AppCompatActivity {
     
     public void giveOrder(View view) {
         if(shopping_list.size() != 0) {
-            GelsinActions.giveAnOrder(shopping_list, new ResultHandler() {
+            GelsinActions.giveAnOrder(intent.getStringExtra("shop_id"), shopping_list, new ResultHandler() {
                 @Override
                 public void handle(String result) {
                     Toast.makeText(OrderActivity.this, R.string.successful_order, Toast.LENGTH_SHORT);
