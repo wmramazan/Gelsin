@@ -1,11 +1,23 @@
 package com.gelsin.android;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.gelsin.android.adapter.ShopListAdapter;
+import com.gelsin.android.item.ShopItem;
+import com.gelsin.android.util.RecyclerTouchListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by wmramazan on 17.02.2018.
@@ -14,11 +26,51 @@ import android.view.ViewGroup;
 public class ShopsFragment extends Fragment {
 
     private View view;
+    private Context context;
+    private RecyclerView shopList;
+    private ArrayList<ShopItem> shops;
+    private ShopListAdapter shopListAdapter;
+    private ProgressBar progressBar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_shops, container, false);
+        view = inflater.inflate(R.layout.list_item, container, false);
+        context = getContext();
+
+        shopList = view.findViewById(R.id.itemList);
+        progressBar = view.findViewById(R.id.itemList_progress);
+
+        shops = new ArrayList<>();
+
+        // TODO: 17.02.2018 Get nearby shops
+
+        if(shops.size() == 0) {
+            TextView noContent_title = view.findViewById(R.id.itemList_noContent_title);
+            TextView noContent_text = view.findViewById(R.id.itemList_noContent_text);
+            noContent_title.setText(R.string.no_nearby_shops_title);
+            noContent_text.setText(R.string.no_nearby_shops_text);
+            view.findViewById(R.id.itemList_noContent).setVisibility(View.VISIBLE);
+        } else {
+            shopList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+            shopListAdapter = new ShopListAdapter(context, shops);
+            shopList.setAdapter(shopListAdapter);
+        }
+
+        progressBar.setVisibility(View.GONE);
+
+        shopList.addOnItemTouchListener(new RecyclerTouchListener(context, shopList, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
         return view;
     }
 

@@ -10,4 +10,6 @@
     <string name="enable_location_provider">Please enable location provider.</string>
     <string name="detecting_location">Detecting your location..</string>
     <string name="your_location">Your Location</string>
+    <string name="no_nearby_shops_title">No nearby shops</string>
+    <string name="no_nearby_shops_text">You can talk with owners of local shops to use Gelsin</string>
 </resources>
