@@ -1,5 +1,9 @@
 package com.gelsin.android;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +11,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +24,9 @@ public class CustomerMainActivity extends AppCompatActivity {
     ShopsFragment shopsFragment;
     OrdersFragment ordersFragment;
     FragmentManager fragmentManager;
+    BroadcastReceiver receiver;
+    Intent intent;
+    IntentFilter intentFilter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -75,5 +83,43 @@ public class CustomerMainActivity extends AppCompatActivity {
             mapFragment.showNearbyPlaces();
         else
             Toast.makeText(this, getString(R.string.no_permission), Toast.LENGTH_LONG);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(null == receiver) {
+            receiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+
+                    if(intent.getAction().equals(LocationService.LOCATION)) {
+
+                        mapFragment.moveCameraToLocation(
+                                intent.getExtras().getDouble(LocationService.LOCATION_LATITUDE),
+                                intent.getExtras().getDouble(LocationService.LOCATION_LONGITUDE)
+                        );
+
+                        // TODO: 17.02.2018 Show nearby shops 
+                        
+                    } else if(intent.getAction().equals(LocationService.PLACE))
+                        mapFragment.setPlace(intent.getExtras().getString(LocationService.PLACE));
+
+                }
+            };
+        }
+
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(LocationService.LOCATION);
+        intentFilter.addAction(LocationService.PLACE);
+        registerReceiver(receiver, intentFilter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(null != receiver) unregisterReceiver(receiver);
     }
 }

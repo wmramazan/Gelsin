@@ -6,4 +6,6 @@
     <string name="orders">Orders</string>
     <string name="profile">Profile</string>
     <string name="no_permission">You need to grant the permission to see nearby shops.</string>
+    <string name="no_internet">Please check your internet connection.</string>
+    <string name="enable_location_provider">Please enable location provider.</string>
 </resources>

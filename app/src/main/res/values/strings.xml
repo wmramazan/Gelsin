@@ -8,4 +8,6 @@
     <string name="no_permission">You need to grant the permission to see nearby shops.</string>
     <string name="no_internet">Please check your internet connection.</string>
     <string name="enable_location_provider">Please enable location provider.</string>
+    <string name="detecting_location">Detecting your location..</string>
+    <string name="your_location">Your Location</string>
 </resources>

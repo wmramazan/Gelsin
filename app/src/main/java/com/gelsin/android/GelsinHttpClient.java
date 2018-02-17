@@ -42,7 +42,7 @@ public class GelsinHttpClient {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 // TODO: 17.02.2018 Check Internet Connection
-                Toast.makeText(Gelsin.get(), R.string.noInternet, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Gelsin.get(), R.string.no_internet, Toast.LENGTH_SHORT).show();
 
             }
         });

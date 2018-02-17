@@ -16,13 +16,14 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/fragment_map_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:text="@string/nearby_shops"
+                android:background="@color/transparent_background"
+                android:text="@string/detecting_location"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:padding="16dp"/>
+                android:padding="8dp"/>
 
         </LinearLayout>
 

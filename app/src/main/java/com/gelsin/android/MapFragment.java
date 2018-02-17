@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,12 +26,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap map;
     private View view;
     private Intent intent;
+    private TextView place;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_map, container, false);
+
+        place = view.findViewById(R.id.fragment_map_place);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.fragment_map);
         mapFragment.getMapAsync(this);
@@ -66,5 +71,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void startLocationService() {
         intent = new Intent(getContext(), LocationService.class);
         getContext().startService(intent);
+    }
+
+    public void moveCameraToLocation(double latitude, double longitude) {
+        LatLng position = new LatLng(latitude, longitude);
+        map.addMarker(new MarkerOptions().position(position).title(getString(R.string.your_location)));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
+    }
+
+    public void setPlace(String place_name) {
+        place.setText(place_name);
     }
 }

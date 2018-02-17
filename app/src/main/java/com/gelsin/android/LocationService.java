@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,13 +23,18 @@ import java.util.Locale;
 public class LocationService extends Service implements LocationListener {
 
     public static final String LOCATION = "current_location";
-    private final String TAG = "LocationListener";
-    private final int FREQ = 3000;
+    public static final String LOCATION_LATITUDE = "latitude";
+    public static final String LOCATION_LONGITUDE = "longitude";
+    public static final String PLACE = "place";
+
+    private final String TAG = "LocationService";
+    private final int FREQ = 1 * 1000;
 
     private LocationManager locationManager;
     private Geocoder geocoder;
     private Intent intent;
     private String place_name;
+    private Criteria criteria;
 
     @Nullable
     @Override
@@ -43,29 +49,30 @@ public class LocationService extends Service implements LocationListener {
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
+        criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+
+        /*
         //noinspection MissingPermission
         locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
+                locationManager.getBestProvider(criteria, true),
                 FREQ,
                 0,
                 this
         );
+        */
 
         geocoder = new Geocoder(LocationService.this, Locale.getDefault());
+
+        //noinspection MissingPermission
+        sendLocation(locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true)));
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        new PlaceAsyncTask().execute(
-                location.getLatitude(),
-                location.getLongitude()
-        );
+        Log.d(TAG, "onLocationChanged");
 
-        intent = new Intent(LOCATION);
-        intent.putExtra("latitude", location.getLatitude());
-        intent.putExtra("longitude", location.getLongitude());
-        sendBroadcast(intent);
-
+        sendLocation(location);
     }
 
     @Override
@@ -116,15 +123,37 @@ public class LocationService extends Service implements LocationListener {
 
             if(null != address) {
                 place_name = address.getFeatureName().length() > 4 ? address.getFeatureName() : address.getAddressLine(0);
+                Log.d(TAG, place_name);
+
+                /*
                 String str_address = "";
                 for(int i = 0; i <= address.getMaxAddressLineIndex(); i++)
                     str_address += address.getAddressLine(i) + ", ";
                 str_address.substring(0, str_address.length() - 2);
                 Log.d(TAG, "Address: " + address);
+                */
+
+                intent = new Intent(PLACE);
+                intent.putExtra(PLACE, place_name);
+                sendBroadcast(intent);
             }
 
             return null;
         }
+
+    }
+
+    public void sendLocation(Location location) {
+
+        new PlaceAsyncTask().execute(
+                location.getLatitude(),
+                location.getLongitude()
+        );
+
+        intent = new Intent(LOCATION);
+        intent.putExtra(LOCATION_LATITUDE, location.getLatitude());
+        intent.putExtra(LOCATION_LONGITUDE, location.getLongitude());
+        sendBroadcast(intent);
 
     }
 }
