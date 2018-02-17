@@ -11,8 +11,10 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -79,6 +81,12 @@ public class LocationService extends Service implements LocationListener {
     @Override
     public void onProviderDisabled(String s) {
         Log.d(TAG, "onProviderDisabled");
+
+        Toast.makeText(this, R.string.enable_location_provider, Toast.LENGTH_LONG);
+
+        intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override
