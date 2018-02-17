@@ -3,6 +3,7 @@ package com.gelsin.android;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -18,8 +19,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -27,6 +34,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private View view;
     private Intent intent;
     private TextView place;
+    private LatLng position;
 
     @Nullable
     @Override
@@ -64,19 +72,40 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         //map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
-    public void showNearbyPlaces() {
-        startLocationService();
-    }
-
     public void startLocationService() {
         intent = new Intent(getContext(), LocationService.class);
         getContext().startService(intent);
     }
 
-    public void moveCameraToLocation(double latitude, double longitude) {
-        LatLng position = new LatLng(latitude, longitude);
+    public void moveCameraToLocation() {
         map.addMarker(new MarkerOptions().position(position).title(getString(R.string.your_location)));
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
+    }
+
+    public void showNearbyShops() {
+
+        ArrayList<LatLng> positions_of_shops = new ArrayList<>();
+        positions_of_shops.add(new LatLng(position.latitude + 0.002, position.longitude + 0.001));
+        positions_of_shops.add(new LatLng(position.latitude + 0.001, position.longitude - 0.002));
+        positions_of_shops.add(new LatLng(position.latitude - 0.002, position.longitude + 0.001));
+        positions_of_shops.add(new LatLng(position.latitude - 0.001, position.longitude - 0.001));
+
+        for(LatLng position : positions_of_shops) {
+            map.addMarker(
+                    new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.shop_restaurant))
+                    .title("Title")
+                    .snippet("Snippet")
+                    .position(position)
+            );
+        }
+
+    }
+
+    public void setLocation(double latitude, double longitude) {
+        position = new LatLng(latitude, longitude);
+
+        moveCameraToLocation();
+        showNearbyShops();
     }
 
     public void setPlace(String place_name) {

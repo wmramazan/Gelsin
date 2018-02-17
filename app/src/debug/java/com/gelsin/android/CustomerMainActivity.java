@@ -80,7 +80,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if(grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED)
-            mapFragment.showNearbyPlaces();
+            mapFragment.startLocationService();
         else
             Toast.makeText(this, getString(R.string.no_permission), Toast.LENGTH_LONG);
     }
@@ -96,7 +96,7 @@ public class CustomerMainActivity extends AppCompatActivity {
 
                     if(intent.getAction().equals(LocationService.LOCATION)) {
 
-                        mapFragment.moveCameraToLocation(
+                        mapFragment.setLocation(
                                 intent.getExtras().getDouble(LocationService.LOCATION_LATITUDE),
                                 intent.getExtras().getDouble(LocationService.LOCATION_LONGITUDE)
                         );
