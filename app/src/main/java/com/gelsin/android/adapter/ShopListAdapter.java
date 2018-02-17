@@ -38,7 +38,7 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopLi
 
         holder.name.setText(item.getName());
         // TODO: 17.02.2018 Add distance info
-        holder.info.setText(item.getCategory());
+        holder.info.setText(item.getCategory_name());
     }
 
     public void deleteItem(int index) {

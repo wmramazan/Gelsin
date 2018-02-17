@@ -40,7 +40,7 @@ public class GelsinHttpClient {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if(jsonObject.has("data"))
-                        resultHandler.handle(jsonObject.getJSONArray("data"));
+                        resultHandler.handle(jsonObject.getJSONArray("data").toString());
                     else
                         Toast.makeText(Gelsin.get(), R.string.something_went_wrong, Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {

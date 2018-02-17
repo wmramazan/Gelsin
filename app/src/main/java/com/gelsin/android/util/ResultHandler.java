@@ -11,6 +11,6 @@ import org.json.JSONObject;
 
 public interface ResultHandler {
 
-    void handle(JSONArray result);
+    void handle(String result);
 
 }

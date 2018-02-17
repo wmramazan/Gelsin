@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gelsin.android.item.ShopItem;
 import com.gelsin.android.util.ResultHandler;
@@ -24,8 +25,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +49,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private TextView place;
     private LatLng position;
     private ArrayList<ShopItem> nearbyShops;
+    private MarkerOptions markerOptions;
 
     public MapFragment() {
 
@@ -104,38 +109,37 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         GelsinActions.getNearbyShops(position.latitude, position.longitude, new ResultHandler() {
             @Override
-            public void handle(JSONArray result) {
+            public void handle(String result) {
 
-                //Log.d(TAG, String.valueOf(result.length()));
+                Gson gson = new Gson();
+                nearbyShops = gson.fromJson(result, new TypeToken<ArrayList<ShopItem>>(){}.getType());
 
-                try {
-                    for(int i = 0; i < result.length(); i++) {
-                        JSONObject jsonObject = result.getJSONObject(i);
-                        JSONArray location = jsonObject.getJSONArray("loc");
-                        nearbyShops.add(new ShopItem(
-                                jsonObject.getString("name"),
-                                jsonObject.getJSONObject("category").getString("name"),
-                                location.getDouble(0),
-                                location.getDouble(1)
-                        ));
+                if(nearbyShops.size() > 0) {
+                    for(ShopItem shop : nearbyShops) {
+                        markerOptions = new MarkerOptions();
+                        markerOptions.title(shop.getName())
+                                .snippet(shop.getCategory_name())
+                                .position(new LatLng(shop.getLatitude(), shop.getLongitude()));
+
+                        if(shop.getCategory_name().equals(ShopItem.CATEGORY_RESTAURANT))
+                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.shop_restaurant));
+                        else if(shop.getCategory_name().equals(ShopItem.CATEGORY_BAKERY))
+                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.shop_bakery));
+                        else if(shop.getCategory_name().equals(ShopItem.CATEGORY_MARKET))
+                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.shop_market));
+
+                        map.addMarker(markerOptions);
                     }
-                } catch (JSONException e) {
-                    Log.d(TAG, "Exception");
-                    e.printStackTrace();
+                } else {
+                    Toast.makeText(getContext(), R.string.no_nearby_shops_title, Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
 
-        //Log.d(TAG, String.valueOf(nearbyShops.size()));
-
-        for(ShopItem shop : nearbyShops)
-            map.addMarker(
-                    new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.shop_restaurant))
-                    .title(shop.getName())
-                    .snippet(shop.getCategory())
-                    .position(new LatLng(shop.getLatitude(), shop.getLongitude()))
-            );
+        map.addCircle(new CircleOptions().center(position)
+                .radius(GelsinActions.LIMIT_DISTANCE)
+                .strokeColor(getResources().getColor(R.color.colorPrimaryDark)));
 
     }
 
