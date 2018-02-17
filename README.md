@@ -9,6 +9,10 @@ An application which the customers can give order from nearby shops.
 * The owner of a shop can sell their products by adding his/her shop to Gelsin.
 * The owner of a shop can see other products to add new products for his/her shop. 
 
+## Used Libraries
+* Android Support Libraries
+* [AsyncHttpClient (loopj)](https://github.com/loopj/android-async-http)
+
 ## Team Members
 * Emre Kul
 * Ramazan Vapurcu
