@@ -9,11 +9,13 @@ import android.app.Application;
 public class Gelsin extends Application {
 
     private static Gelsin instance;
+    static GelsinHttpClient client;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        client = new GelsinHttpClient();
     }
 
     public static synchronized Gelsin get() {
