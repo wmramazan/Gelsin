@@ -28,12 +28,12 @@ public class ShopMainActivity extends AppCompatActivity {
                 case R.id.navigation_orders:
                     if(null == shopOrdersFragment)
                         shopOrdersFragment = new ShopOrdersFragment();
-                    fragmentManager.beginTransaction().replace(R.id.customer_main_container, shopOrdersFragment).commit();
+                    fragmentManager.beginTransaction().replace(R.id.shop_main_container, shopOrdersFragment).commit();
                     break;
                 case R.id.navigation_products:
                     if(null == productsFragment)
                         productsFragment = new ProductsFragment();
-                    fragmentManager.beginTransaction().replace(R.id.customer_main_container, productsFragment).commit();
+                    fragmentManager.beginTransaction().replace(R.id.shop_main_container, productsFragment).commit();
                     break;
             }
             return true;

@@ -89,12 +89,14 @@ public class OrderActivity extends AppCompatActivity {
     }
     
     public void giveOrder(View view) {
-        GelsinActions.giveAnOrder(shopping_list, new ResultHandler() {
-            @Override
-            public void handle(String result) {
-                Toast.makeText(OrderActivity.this, R.string.successful_order, Toast.LENGTH_SHORT);
-                finish();
-            }
-        });
+        if(shopping_list.size() != 0) {
+            GelsinActions.giveAnOrder(shopping_list, new ResultHandler() {
+                @Override
+                public void handle(String result) {
+                    Toast.makeText(OrderActivity.this, R.string.successful_order, Toast.LENGTH_SHORT);
+                    finish();
+                }
+            });
+        }
     }
 }
