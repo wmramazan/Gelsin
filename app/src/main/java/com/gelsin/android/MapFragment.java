@@ -55,10 +55,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     static ArrayList<ShopItem> nearbyShops;
 
-    public MapFragment() {
-
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -128,6 +124,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
                 Gson gson = new Gson();
                 nearbyShops = gson.fromJson(result, new TypeToken<ArrayList<ShopItem>>(){}.getType());
+
+                // TODO: 17.02.2018 Add distance attribute to ShopItem
 
                 if(nearbyShops.size() > 0) {
                     for(ShopItem shop : nearbyShops) {
