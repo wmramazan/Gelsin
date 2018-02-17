@@ -11,5 +11,7 @@
     <string name="detecting_location">Detecting your location..</string>
     <string name="your_location">Your Location</string>
     <string name="no_nearby_shops_title">No nearby shops</string>
-    <string name="no_nearby_shops_text">You can talk with owners of local shops to use Gelsin</string>
+    <string name="no_nearby_shops_text">You can talk with owners of local shops to use Gelsin.</string>
+    <string name="no_orders_title">No orders</string>
+    <string name="no_orders_text">You can give an order by selecting a shop on the map.</string>
 </resources>

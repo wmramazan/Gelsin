@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,15 +31,23 @@ import java.util.Random;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
+    private final String TAG = "MapFragment";
+
     private GoogleMap map;
     private View view;
     private Intent intent;
     private TextView place;
     private LatLng position;
 
+    public MapFragment() {
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        Log.d(TAG, "onCreateView");
 
         view = inflater.inflate(R.layout.fragment_map, container, false);
 

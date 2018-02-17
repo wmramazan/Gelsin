@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CustomerMainActivity extends AppCompatActivity {
+
+    private final String TAG = "CustomerMainActivity";
 
     ActionBar actionBar;
     BottomNavigationView navigationView;
@@ -34,6 +37,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+                // TODO: 17.02.2018 Fix MapFragment re-inflating issue
                 case R.id.navigation_map:
                     if(null == mapFragment)
                         mapFragment = new MapFragment();
@@ -59,6 +63,7 @@ public class CustomerMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
 

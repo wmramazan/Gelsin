@@ -42,6 +42,7 @@ public class ShopsFragment extends Fragment {
         progressBar = view.findViewById(R.id.itemList_progress);
 
         shops = new ArrayList<>();
+        //shops.add(new ShopItem("test", "test", "test", 12.21, 123.12));
 
         // TODO: 17.02.2018 Get nearby shops
 
