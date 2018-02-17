@@ -72,7 +72,9 @@ public class ShopsFragment extends Fragment {
         shopList.addOnItemTouchListener(new RecyclerTouchListener(context, shopList, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                startActivity(new Intent(getActivity(), ShopProductsActivity.class).putExtra("shop_id", shops.get(position).get_id()));
+                startActivity(new Intent(getActivity(), ShopProductsActivity.class)
+                        .putExtra("shop_id", shops.get(position).get_id())
+                        .putExtra("shop_name", shops.get(position).getName()));
             }
 
             @Override

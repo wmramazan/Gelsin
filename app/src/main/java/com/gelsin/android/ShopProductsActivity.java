@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.gelsin.android.adapter.ProductListAdapter;
 import com.gelsin.android.item.ProductItem;
@@ -15,15 +17,21 @@ import com.gelsin.android.util.ResultHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ShopProductsActivity extends AppCompatActivity {
 
+    private final String TAG = "ShopProductsActivity";
+
     private Intent intent;
     private RecyclerView productList;
-    private ArrayList<ProductItem> products;
+    private ArrayList<ProductItem> products, shopping_list;
     private ProductListAdapter productListAdapter;
     private ProgressBar progressBar;
+    private TextView productsAmount;
+    private float amount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +39,15 @@ public class ShopProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shop_products);
 
         intent = getIntent();
+        getSupportActionBar().setSubtitle(intent.getStringExtra("shop_name"));
 
         productList = findViewById(R.id.shop_products);
         progressBar = findViewById(R.id.shop_products_progress);
+        productsAmount = findViewById(R.id.shop_products_amount);
+        productsAmount.setText(getString(R.string.amount) + String.valueOf(amount));
 
         products = new ArrayList<>();
+        shopping_list = new ArrayList<>();
         GelsinActions.getShopProducts(intent.getStringExtra("shop_id"), new ResultHandler() {
             @Override
             public void handle(String result) {
@@ -49,6 +61,21 @@ public class ShopProductsActivity extends AppCompatActivity {
                     productList.setLayoutManager(new LinearLayoutManager(ShopProductsActivity.this, LinearLayoutManager.VERTICAL, false));
                     productListAdapter = new ProductListAdapter(ShopProductsActivity.this, products);
                     productList.setAdapter(productListAdapter);
+
+                    productList.addOnItemTouchListener(new RecyclerTouchListener(ShopProductsActivity.this, productList, new RecyclerTouchListener.ClickListener() {
+                        @Override
+                        public void onClick(View view, int position) {
+                            shopping_list.add(products.get(position));
+                            amount += products.get(position).getPrice();
+
+                            productsAmount.setText(getString(R.string.amount) + " " + String.valueOf(amount));
+                        }
+
+                        @Override
+                        public void onLongClick(View view, int position) {
+
+                        }
+                    }));
                 }
 
                 progressBar.setVisibility(View.GONE);
@@ -56,16 +83,10 @@ public class ShopProductsActivity extends AppCompatActivity {
             }
         });
 
-        productList.addOnItemTouchListener(new RecyclerTouchListener(this, productList, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
 
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
+    }
+    
+    public void giveOrder(View view) {
+        // TODO: 17.02.2018 Give order
     }
 }

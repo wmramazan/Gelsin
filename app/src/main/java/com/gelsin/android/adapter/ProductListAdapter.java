@@ -40,6 +40,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.price.setText(String.valueOf(item.getPrice()));
     }
 
+    public ProductItem getItem(int index) {
+        return products.get(index);
+    }
+
     public void deleteItem(int index) {
         products.remove(index);
         notifyItemRemoved(index);

@@ -53,7 +53,7 @@
             android:exported="false" />
 
         <activity android:name=".ShopMainActivity" />
-        <activity android:name=".ShopProductsActivity"></activity>
+        <activity android:name=".ShopProductsActivity" android:label="@string/shop_products"></activity>
     </application>
 
 </manifest>

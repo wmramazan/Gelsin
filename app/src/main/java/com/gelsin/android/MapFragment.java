@@ -90,20 +90,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
-                startActivity(new Intent(getActivity(), ShopProductsActivity.class).putExtra("shop_id", marker.getTag().toString()));
-                return true;
+            public void onInfoWindowClick(Marker marker) {
+                startActivity(new Intent(getActivity(), ShopProductsActivity.class)
+                        .putExtra("shop_id", marker.getTag().toString())
+                        .putExtra("shop_name", marker.getTitle()));
             }
         });
 
-        //map.getUiSettings().setZoomControlsEnabled(true);
 
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                //map.getUiSettings().setZoomControlsEnabled(true);
+
+                // Add a marker in Sydney and move the camera
+                //LatLng sydney = new LatLng(-34, 151);
+                //map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                //map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     public void startLocationService() {

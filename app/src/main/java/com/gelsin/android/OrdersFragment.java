@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.gelsin.android.adapter.OrderListAdapter;
 import com.gelsin.android.item.OrderItem;
 import com.gelsin.android.util.RecyclerTouchListener;
+import com.gelsin.android.util.ResultHandler;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,12 @@ public class OrdersFragment extends Fragment {
         //orders.add(new OrderItem("test", "test", "test", 12.21, 123.12));
         progressBar.setVisibility(View.GONE);
 
-        // TODO: 17.02.2018 Get orders of the customer
+        GelsinActions.getCustomerOrders(new ResultHandler() {
+            @Override
+            public void handle(String result) {
+
+            }
+        });
 
         if(orders.size() == 0) {
             TextView noContent_title = view.findViewById(R.id.itemList_noContent_title);

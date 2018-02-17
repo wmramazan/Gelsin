@@ -17,4 +17,6 @@
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="shop_management">Shop Management</string>
     <string name="no_products">No products</string>
+    <string name="shop_products">Shop Products</string>
+    <string name="amount">Amount:</string>
 </resources>
