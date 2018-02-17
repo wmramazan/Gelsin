@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.gelsin.android.adapter.ShopListAdapter;
 import com.gelsin.android.item.ShopItem;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     BroadcastReceiver receiver;
     IntentFilter intentFilter;
+    LatLng location;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,7 +45,6 @@ public class CustomerMainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                // TODO: 17.02.2018 Fix MapFragment re-inflating issue
                 case R.id.navigation_map:
                     if(null == mapFragment)
                         mapFragment = new MapFragment();
@@ -109,10 +110,12 @@ public class CustomerMainActivity extends AppCompatActivity {
 
                     if(intent.getAction().equals(LocationService.LOCATION)) {
 
-                        mapFragment.setLocation(
+                        location = new LatLng(
                                 intent.getExtras().getDouble(LocationService.LOCATION_LATITUDE),
                                 intent.getExtras().getDouble(LocationService.LOCATION_LONGITUDE)
                         );
+
+                        mapFragment.setLocation(location);
                         
                     } else if(intent.getAction().equals(LocationService.PLACE))
                         mapFragment.setPlace(intent.getExtras().getString(LocationService.PLACE));

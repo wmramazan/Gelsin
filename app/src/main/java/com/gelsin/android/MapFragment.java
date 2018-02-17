@@ -106,6 +106,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public void startLocationService() {
         intent = new Intent(getContext(), LocationService.class);
+        getContext().stopService(intent);
         getContext().startService(intent);
     }
 
@@ -158,8 +159,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
-    public void setLocation(double latitude, double longitude) {
-        position = new LatLng(latitude, longitude);
+    public void setLocation(LatLng location) {
+        position = location;
 
         moveCameraToLocation();
         showNearbyShops();
