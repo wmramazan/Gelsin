@@ -12,6 +12,7 @@ An application which the customers can give order from nearby shops.
 ## Used Libraries
 * Android Support Libraries
 * [AsyncHttpClient (loopj)](https://github.com/loopj/android-async-http)
+* [Google Gson](https://github.com/google/gson)
 
 ## Team Members
 * Emre Kul
