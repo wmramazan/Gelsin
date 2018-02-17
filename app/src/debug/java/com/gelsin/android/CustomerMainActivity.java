@@ -18,6 +18,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gelsin.android.adapter.ShopListAdapter;
+import com.gelsin.android.item.ShopItem;
+
+import java.util.ArrayList;
+
 public class CustomerMainActivity extends AppCompatActivity {
 
     private final String TAG = "CustomerMainActivity";
@@ -30,7 +35,6 @@ public class CustomerMainActivity extends AppCompatActivity {
     ProfileFragment profileFragment;
     FragmentManager fragmentManager;
     BroadcastReceiver receiver;
-    Intent intent;
     IntentFilter intentFilter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -109,8 +113,6 @@ public class CustomerMainActivity extends AppCompatActivity {
                                 intent.getExtras().getDouble(LocationService.LOCATION_LATITUDE),
                                 intent.getExtras().getDouble(LocationService.LOCATION_LONGITUDE)
                         );
-
-                        // TODO: 17.02.2018 Show nearby shops 
                         
                     } else if(intent.getAction().equals(LocationService.PLACE))
                         mapFragment.setPlace(intent.getExtras().getString(LocationService.PLACE));

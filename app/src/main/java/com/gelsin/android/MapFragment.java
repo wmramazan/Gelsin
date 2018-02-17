@@ -48,8 +48,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private Intent intent;
     private TextView place;
     private LatLng position;
-    private ArrayList<ShopItem> nearbyShops;
     private MarkerOptions markerOptions;
+
+    static ArrayList<ShopItem> nearbyShops;
 
     public MapFragment() {
 

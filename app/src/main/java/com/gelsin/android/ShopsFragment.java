@@ -12,10 +12,17 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gelsin.android.adapter.ShopListAdapter;
 import com.gelsin.android.item.ShopItem;
 import com.gelsin.android.util.RecyclerTouchListener;
+import com.gelsin.android.util.ResultHandler;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -41,10 +48,11 @@ public class ShopsFragment extends Fragment {
         shopList = view.findViewById(R.id.itemList);
         progressBar = view.findViewById(R.id.itemList_progress);
 
-        shops = new ArrayList<>();
+        if(null == MapFragment.nearbyShops)
+            shops = new ArrayList<>();
+        else
+            shops = MapFragment.nearbyShops;
         //shops.add(new ShopItem("test", "test", "test", 12.21, 123.12));
-
-        // TODO: 17.02.2018 Get nearby shops
 
         if(shops.size() == 0) {
             TextView noContent_title = view.findViewById(R.id.itemList_noContent_title);
