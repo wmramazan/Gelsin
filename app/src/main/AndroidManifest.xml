@@ -51,6 +51,8 @@
             android:name=".LocationService"
             android:enabled="true"
             android:exported="false" />
+
+        <activity android:name=".ShopMainActivity"></activity>
     </application>
 
 </manifest>
