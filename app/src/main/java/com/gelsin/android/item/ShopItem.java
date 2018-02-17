@@ -6,13 +6,12 @@ package com.gelsin.android.item;
 
 public class ShopItem {
 
-    String name, category, location;
+    String name, category;
     double latitude, longitude;
 
-    public ShopItem(String name, String category, String location, double latitude, double longitude) {
+    public ShopItem(String name, String category, double latitude, double longitude) {
         this.name = name;
         this.category = category;
-        this.location = location;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -23,10 +22,6 @@ public class ShopItem {
 
     public String getCategory() {
         return category;
-    }
-
-    public String getLocation() {
-        return location;
     }
 
     public double getLatitude() {

@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.gelsin.android.item.ShopItem;
+import com.gelsin.android.util.ResultHandler;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,6 +26,10 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -38,6 +44,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private Intent intent;
     private TextView place;
     private LatLng position;
+    private ArrayList<ShopItem> nearbyShops;
 
     public MapFragment() {
 
@@ -93,20 +100,42 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public void showNearbyShops() {
 
-        ArrayList<LatLng> positions_of_shops = new ArrayList<>();
-        positions_of_shops.add(new LatLng(position.latitude + 0.002, position.longitude + 0.001));
-        positions_of_shops.add(new LatLng(position.latitude + 0.001, position.longitude - 0.002));
-        positions_of_shops.add(new LatLng(position.latitude - 0.002, position.longitude + 0.001));
-        positions_of_shops.add(new LatLng(position.latitude - 0.001, position.longitude - 0.001));
+        nearbyShops = new ArrayList<>();
 
-        for(LatLng position : positions_of_shops) {
+        GelsinActions.getNearbyShops(position.latitude, position.longitude, new ResultHandler() {
+            @Override
+            public void handle(JSONArray result) {
+
+                //Log.d(TAG, String.valueOf(result.length()));
+
+                try {
+                    for(int i = 0; i < result.length(); i++) {
+                        JSONObject jsonObject = result.getJSONObject(i);
+                        JSONArray location = jsonObject.getJSONArray("loc");
+                        nearbyShops.add(new ShopItem(
+                                jsonObject.getString("name"),
+                                jsonObject.getJSONObject("category").getString("name"),
+                                location.getDouble(0),
+                                location.getDouble(1)
+                        ));
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "Exception");
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        //Log.d(TAG, String.valueOf(nearbyShops.size()));
+
+        for(ShopItem shop : nearbyShops)
             map.addMarker(
                     new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.shop_restaurant))
-                    .title("Title")
-                    .snippet("Snippet")
-                    .position(position)
+                    .title(shop.getName())
+                    .snippet(shop.getCategory())
+                    .position(new LatLng(shop.getLatitude(), shop.getLongitude()))
             );
-        }
 
     }
 
