@@ -66,8 +66,9 @@ public class GelsinHttpClient {
         client.post(BASE_URL + url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                // TODO: 17.02.2018 Handle response
-                Log.d(TAG, new String(responseBody));
+                String result = new String(responseBody);
+                resultHandler.handle(new String(result));
+                Log.d(TAG, result);
             }
 
             @Override

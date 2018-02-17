@@ -89,8 +89,7 @@ public class ShopProductsActivity extends AppCompatActivity {
     }
     
     public void giveOrder(View view) {
-        Gson gson = new Gson();
-        GelsinActions.giveAnOrder(gson.toJson(shopping_list), new ResultHandler() {
+        GelsinActions.giveAnOrder(shopping_list, new ResultHandler() {
             @Override
             public void handle(String result) {
                 Toast.makeText(ShopProductsActivity.this, R.string.successful_order, Toast.LENGTH_SHORT);
