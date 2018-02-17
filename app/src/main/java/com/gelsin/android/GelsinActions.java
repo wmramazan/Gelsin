@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class GelsinActions {
 
-    public static final int LIMIT_DISTANCE = 1000;
+    public static final int LIMIT_DISTANCE = 2000;
     public static final String CUSTOMER_ID = "5a880722f36d2866535e368c";
     public static final String SHOP_ID = "5a8802099f9a5628182951b8";
 

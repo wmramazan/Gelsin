@@ -89,7 +89,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                startActivity(new Intent(getActivity(), ShopProductsActivity.class)
+                startActivity(new Intent(getActivity(), OrderActivity.class)
                         .putExtra("shop_id", marker.getTag().toString())
                         .putExtra("shop_name", marker.getTitle()));
             }

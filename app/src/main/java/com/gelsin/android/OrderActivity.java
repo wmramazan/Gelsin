@@ -22,9 +22,9 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class ShopProductsActivity extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity {
 
-    private final String TAG = "ShopProductsActivity";
+    private final String TAG = "OrderActivity";
 
     private Intent intent;
     private RecyclerView productList;
@@ -38,14 +38,14 @@ public class ShopProductsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop_products);
+        setContentView(R.layout.activity_order);
 
         intent = getIntent();
         getSupportActionBar().setSubtitle(intent.getStringExtra("shop_name"));
 
-        productList = findViewById(R.id.shop_products);
-        progressBar = findViewById(R.id.shop_products_progress);
-        productsAmount = findViewById(R.id.shop_products_amount);
+        productList = findViewById(R.id.order_products);
+        progressBar = findViewById(R.id.order_progress);
+        productsAmount = findViewById(R.id.order_amount);
         productsAmount.setText(getString(R.string.amount) + " " + String.valueOf(amount));
 
         products = new ArrayList<>();
@@ -58,13 +58,13 @@ public class ShopProductsActivity extends AppCompatActivity {
                 products = gson.fromJson(result, new TypeToken<ArrayList<ProductItem>>(){}.getType());
 
                 if(products.size() == 0) {
-                    findViewById(R.id.shop_no_products).setVisibility(View.VISIBLE);
+                    findViewById(R.id.order_no_products).setVisibility(View.VISIBLE);
                 } else {
-                    productList.setLayoutManager(new LinearLayoutManager(ShopProductsActivity.this, LinearLayoutManager.VERTICAL, false));
-                    productListAdapter = new ProductListAdapter(ShopProductsActivity.this, products);
+                    productList.setLayoutManager(new LinearLayoutManager(OrderActivity.this, LinearLayoutManager.VERTICAL, false));
+                    productListAdapter = new ProductListAdapter(OrderActivity.this, products);
                     productList.setAdapter(productListAdapter);
 
-                    productList.addOnItemTouchListener(new RecyclerTouchListener(ShopProductsActivity.this, productList, new RecyclerTouchListener.ClickListener() {
+                    productList.addOnItemTouchListener(new RecyclerTouchListener(OrderActivity.this, productList, new RecyclerTouchListener.ClickListener() {
                         @Override
                         public void onClick(View view, int position) {
                             shopping_list.add(products.get(position).get_id());
@@ -92,7 +92,7 @@ public class ShopProductsActivity extends AppCompatActivity {
         GelsinActions.giveAnOrder(shopping_list, new ResultHandler() {
             @Override
             public void handle(String result) {
-                Toast.makeText(ShopProductsActivity.this, R.string.successful_order, Toast.LENGTH_SHORT);
+                Toast.makeText(OrderActivity.this, R.string.successful_order, Toast.LENGTH_SHORT);
                 finish();
             }
         });

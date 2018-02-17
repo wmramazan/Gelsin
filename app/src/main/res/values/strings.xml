@@ -16,8 +16,8 @@
     <string name="no_orders_text">You can give an order by selecting a shop on the map.</string>
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="shop_management">Shop Management</string>
-    <string name="no_products">No products</string>
     <string name="shop_products">Shop Products</string>
+    <string name="no_products">No products</string>
     <string name="amount">Amount:</string>
     <string name="successful_order">Your order has been received successfully.</string>
     <string name="completed_order">Completed Order</string>
