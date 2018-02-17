@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.gelsin.android.R;
 import com.gelsin.android.item.OrderItem;
+import com.gelsin.android.item.ProductItem;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,16 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
     @Override
     public void onBindViewHolder(final OrderListViewHolder holder, final int position) {
         final OrderItem item = orders.get(position);
+
+        holder.title.setText(item.getCustomer().getName());
+
+        String products = "";
+        for(ProductItem product : item.getProducts())
+            products += product.getName() + ", ";
+        products = products.substring(0, products.length() - 2);
+        holder.text.setText(products);
+
+        holder.date.setText(item.getDate());
 
     }
 
