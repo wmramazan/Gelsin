@@ -132,7 +132,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     for(ShopItem shop : nearbyShops) {
                         markerOptions = new MarkerOptions();
                         markerOptions.title(shop.getName())
-                                .snippet(shop.getCategory_name())
+                                .snippet(shop.getCategory_name() + " (" + Math.floor(shop.getDistance()) + " m)")
                                 .position(new LatLng(shop.getLatitude(), shop.getLongitude()));
 
                         if(shop.getCategory_name().equals(ShopItem.CATEGORY_RESTAURANT))
