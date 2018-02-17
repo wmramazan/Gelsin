@@ -1,6 +1,7 @@
 package com.gelsin.android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -71,7 +72,7 @@ public class ShopsFragment extends Fragment {
         shopList.addOnItemTouchListener(new RecyclerTouchListener(context, shopList, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
+                startActivity(new Intent(getActivity(), ShopProductsActivity.class).putExtra("shop_id", shops.get(position).get_id()));
             }
 
             @Override

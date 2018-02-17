@@ -10,6 +10,8 @@ import com.loopj.android.http.RequestParams;
 public class GelsinActions {
 
     public static final int LIMIT_DISTANCE = 1000;
+    public static final String CUSTOMER_ID = "5a880722f36d2866535e368c";
+    public static final String SHOP_ID = "5a8802099f9a5628182951b8";
 
     public static void getNearbyShops(double latitude, double longitude, ResultHandler resultHandler) {
         RequestParams params = new RequestParams();
@@ -19,6 +21,10 @@ public class GelsinActions {
 
         Gelsin.client.get("shop/near", params, resultHandler);
 
+    }
+
+    public static void getShopProducts(String shop_id, ResultHandler resultHandler) {
+        Gelsin.client.get("product/shop/" + shop_id, null, resultHandler);
     }
 
     public static void getCustomerOrders() {

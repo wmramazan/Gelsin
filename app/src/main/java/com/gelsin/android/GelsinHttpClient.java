@@ -23,7 +23,6 @@ public class GelsinHttpClient {
 
     private final String BASE_URL = "https://gelsin-bghackathon-18.herokuapp.com/";
     private final String TAG = "GelsinHttpClient";
-    private final String ERROR = "error";
 
     AsyncHttpClient client = new AsyncHttpClient();
 

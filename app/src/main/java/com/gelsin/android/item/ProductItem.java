@@ -6,17 +6,17 @@ package com.gelsin.android.item;
 
 public class ProductItem {
 
-    String id, name;
+    String _id, name;
     float price;
 
-    public ProductItem(String id, String name, float price) {
-        this.id = id;
+    public ProductItem(String _id, String name, float price) {
+        this._id = _id;
         this.name = name;
         this.price = price;
     }
 
-    public String getId() {
-        return id;
+    public String get_id() {
+        return _id;
     }
 
     public String getName() {

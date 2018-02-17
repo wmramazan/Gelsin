@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Customer Name"
+                    android:text="Emre Kul"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
                     android:textSize="18sp"/>
@@ -38,7 +38,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="username"
+                    android:text="emre_kul"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"/>
 

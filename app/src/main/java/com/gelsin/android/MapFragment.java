@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -49,6 +51,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private TextView place;
     private LatLng position;
     private MarkerOptions markerOptions;
+    private ProgressBar progressBar;
 
     static ArrayList<ShopItem> nearbyShops;
 
@@ -65,6 +68,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         view = inflater.inflate(R.layout.fragment_map, container, false);
 
         place = view.findViewById(R.id.fragment_map_place);
+        progressBar = view.findViewById(R.id.fragment_map_progress);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.fragment_map);
         mapFragment.getMapAsync(this);
@@ -85,6 +89,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                startActivity(new Intent(getActivity(), ShopProductsActivity.class).putExtra("shop_id", marker.getTag().toString()));
+                return true;
+            }
+        });
 
         //map.getUiSettings().setZoomControlsEnabled(true);
 
@@ -129,11 +141,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         else if(shop.getCategory_name().equals(ShopItem.CATEGORY_MARKET))
                             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.shop_market));
 
-                        map.addMarker(markerOptions);
+                        map.addMarker(markerOptions).setTag(shop.get_id());
                     }
                 } else {
                     Toast.makeText(getContext(), R.string.no_nearby_shops_title, Toast.LENGTH_SHORT).show();
                 }
+
+                progressBar.setVisibility(View.GONE);
 
             }
         });

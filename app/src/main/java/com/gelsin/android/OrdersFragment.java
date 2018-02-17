@@ -42,6 +42,7 @@ public class OrdersFragment extends Fragment {
 
         orders = new ArrayList<>();
         //orders.add(new OrderItem("test", "test", "test", 12.21, 123.12));
+        progressBar.setVisibility(View.GONE);
 
         // TODO: 17.02.2018 Get orders of the customer
 
@@ -56,8 +57,6 @@ public class OrdersFragment extends Fragment {
             orderListAdapter = new OrderListAdapter(context, orders);
             orderList.setAdapter(orderListAdapter);
         }
-
-        progressBar.setVisibility(View.GONE);
 
         orderList.addOnItemTouchListener(new RecyclerTouchListener(context, orderList, new RecyclerTouchListener.ClickListener() {
             @Override

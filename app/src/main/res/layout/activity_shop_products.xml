@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gelsin.android.ShopProductsActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_products"
+        android:padding="12dp"
+        android:id="@+id/shop_no_products"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:id="@+id/shop_products_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/shop_products"
+        android:scrollbars="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shop_products_amount"
+            android:text="Amount: 100 TL"
+            android:textSize="16dp"
+            android:textColor="@android:color/white"
+            android:layout_centerVertical="true"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/complete"
+            android:onClick="giveOrder"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
