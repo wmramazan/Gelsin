@@ -18,6 +18,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 public class LocationService extends Service implements LocationListener {
@@ -28,7 +29,7 @@ public class LocationService extends Service implements LocationListener {
     public static final String PLACE = "place";
 
     private final String TAG = "LocationService";
-    private final int FREQ = 1 * 1000;
+    private final int FREQ = 3 * 1000;
 
     private LocationManager locationManager;
     private Geocoder geocoder;
@@ -42,6 +43,7 @@ public class LocationService extends Service implements LocationListener {
         return null;
     }
 
+    @SuppressWarnings({"MissingPermission"})
     @Override
     public void onCreate() {
 
@@ -52,20 +54,16 @@ public class LocationService extends Service implements LocationListener {
         criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
 
-        /*
-        //noinspection MissingPermission
+        geocoder = new Geocoder(LocationService.this, Locale.getDefault());
+
+        sendLocation(getLastKnownLocation());
+
         locationManager.requestLocationUpdates(
                 locationManager.getBestProvider(criteria, true),
                 FREQ,
                 0,
                 this
         );
-        */
-
-        geocoder = new Geocoder(LocationService.this, Locale.getDefault());
-
-        //noinspection MissingPermission
-        sendLocation(locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true)));
     }
 
     @Override
@@ -122,8 +120,8 @@ public class LocationService extends Service implements LocationListener {
             }
 
             if(null != address) {
+                Log.d(TAG, address.toString());
                 place_name = address.getFeatureName().length() > 4 ? address.getFeatureName() : address.getAddressLine(0);
-                Log.d(TAG, place_name);
 
                 /*
                 String str_address = "";
@@ -143,17 +141,34 @@ public class LocationService extends Service implements LocationListener {
 
     }
 
+    @SuppressWarnings({"MissingPermission"})
+    private Location getLastKnownLocation() {
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            //noinspection MissingPermission
+            Location location = locationManager.getLastKnownLocation(provider);
+            if (location == null)
+                continue;
+            if (bestLocation == null || location.getAccuracy() < bestLocation.getAccuracy())
+                bestLocation = location;
+        }
+        return bestLocation;
+    }
+
     public void sendLocation(Location location) {
 
-        new PlaceAsyncTask().execute(
-                location.getLatitude(),
-                location.getLongitude()
-        );
+        if(null != location) {
+            new PlaceAsyncTask().execute(
+                    location.getLatitude(),
+                    location.getLongitude()
+            );
 
-        intent = new Intent(LOCATION);
-        intent.putExtra(LOCATION_LATITUDE, location.getLatitude());
-        intent.putExtra(LOCATION_LONGITUDE, location.getLongitude());
-        sendBroadcast(intent);
+            intent = new Intent(LOCATION);
+            intent.putExtra(LOCATION_LATITUDE, location.getLatitude());
+            intent.putExtra(LOCATION_LONGITUDE, location.getLongitude());
+            sendBroadcast(intent);
+        }
 
     }
 }

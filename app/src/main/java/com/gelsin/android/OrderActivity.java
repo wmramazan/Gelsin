@@ -73,6 +73,11 @@ public class OrderActivity extends AppCompatActivity {
 
                             productsAmount.setText(getString(R.string.amount) + " " + String.valueOf(amount));
                         }
+
+                        @Override
+                        public void onLongClick(View view, int position) {
+
+                        }
                     }));
                 }
 

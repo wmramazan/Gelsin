@@ -47,7 +47,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap map;
     private View view;
-    private Intent intent;
+    private Intent serviceIntent;
     private TextView place;
     private LatLng position;
     private MarkerOptions markerOptions;
@@ -66,6 +66,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         place = view.findViewById(R.id.fragment_map_place);
         progressBar = view.findViewById(R.id.fragment_map_progress);
 
+        serviceIntent = new Intent(getContext(), LocationService.class);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.fragment_map);
         mapFragment.getMapAsync(this);
 
@@ -80,6 +82,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             startLocationService();
 
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        getContext().stopService(serviceIntent);
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        startLocationService();
     }
 
     @Override
@@ -105,9 +119,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void startLocationService() {
-        intent = new Intent(getContext(), LocationService.class);
-        getContext().stopService(intent);
-        getContext().startService(intent);
+        getContext().stopService(serviceIntent);
+        getContext().startService(serviceIntent);
     }
 
     public void moveCameraToLocation() {
