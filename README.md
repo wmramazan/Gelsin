@@ -5,9 +5,12 @@ An application which the customers can give order from nearby shops.
 * The customer can see nearby shops in a map.
 * The customer can see shop products by selecting nearby shops in the map.
 * The customer can give an order by preparing shopping list.
+* The customer can follow up his/her status of order.
 
 * The owner of a shop can sell their products by adding his/her shop to Gelsin.
-* The owner of a shop can see other products to add new products for his/her shop. 
+* The owner of a shop can remove and edit their products.
+* The owner of a shop can see other products to add new products for his/her shop.
+* The owner of a shop can see the destination of shop order.
 
 ## Used Libraries
 * Android Support Libraries
