@@ -30,6 +30,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         
         intent = getIntent();
+        actionBar = getSupportActionBar();
 
         inputLayoutName = findViewById(R.id.product_name_layout);
         inputLayoutPrice = findViewById(R.id.product_price_layout);
@@ -39,7 +40,7 @@ public class ProductActivity extends AppCompatActivity {
         buttonRemove = findViewById(R.id.product_remove_button);
         buttonComplete = findViewById(R.id.product_complete_button);
         
-        if(intent.hasExtra("name")) {
+        if(intent.hasExtra("id")) {
             isEdit = true;
             actionBar.setTitle(getString(R.string.edit_product));
             buttonComplete.setText(getString(R.string.edit_product));
@@ -63,8 +64,6 @@ public class ProductActivity extends AppCompatActivity {
         });
 
         requestFocus(inputName);
-
-        actionBar = getSupportActionBar();
     }
 
     public void requestFocus(View view) {
@@ -95,7 +94,7 @@ public class ProductActivity extends AppCompatActivity {
         buttonComplete.setEnabled(false);
         if(isEdit) {
             GelsinActions.editProduct(
-                    intent.getStringExtra("product_id"),
+                    intent.getStringExtra("id"),
                     inputName.getText().toString(),
                     Float.parseFloat(inputPrice.getText().toString()),
                     new ResultHandler() {

@@ -77,6 +77,7 @@ public class ShopOrdersFragment extends Fragment {
             public void onClick(View view, int position) {
                 Intent intent = new Intent(context, DeliveryActivity.class);
                 CustomerItem customer = orders.get(position).getCustomer();
+                intent.putExtra("order_id", orders.get(position).get_id());
                 intent.putExtra("customer_name", customer.getName());
                 intent.putExtra("latitude", customer.getLatitude());
                 intent.putExtra("longitude", customer.getLongitude());

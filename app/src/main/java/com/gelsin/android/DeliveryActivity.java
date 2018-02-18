@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.gelsin.android.util.ResultHandler;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -60,7 +62,14 @@ public class DeliveryActivity extends FragmentActivity implements OnMapReadyCall
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 15));
     }
 
-    public void completeOrder(View view) {
-
+    public void completeOrder(final View view) {
+        view.setEnabled(false);
+        GelsinActions.completeOrder(intent.getStringExtra("order_id"), new ResultHandler() {
+            @Override
+            public void handle(String result) {
+                view.setEnabled(true);
+                finish();
+            }
+        });
     }
 }

@@ -84,4 +84,10 @@ public class ShopMainActivity extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    protected void onResume() {
+        fragmentManager.beginTransaction().replace(R.id.shop_main_container, shopOrdersFragment).commit();
+        super.onResume();
+    }
 }

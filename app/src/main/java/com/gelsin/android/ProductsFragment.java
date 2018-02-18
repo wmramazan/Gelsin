@@ -1,6 +1,7 @@
 package com.gelsin.android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,7 +30,7 @@ public class ProductsFragment extends Fragment {
 
     private View view;
     private Context context;
-    private RecyclerView orderList;
+    private RecyclerView productList;
     private ArrayList<ProductItem> products;
     private ProductListAdapter productListAdapter;
     private ProgressBar progressBar;
@@ -40,7 +41,7 @@ public class ProductsFragment extends Fragment {
         view = inflater.inflate(R.layout.list_item, container, false);
         context = getContext();
 
-        orderList = view.findViewById(R.id.itemList);
+        productList = view.findViewById(R.id.itemList);
         progressBar = view.findViewById(R.id.itemList_progress);
 
         products = new ArrayList<>();
@@ -60,9 +61,9 @@ public class ProductsFragment extends Fragment {
                     noContent_text.setText(R.string.no_products_text);
                     view.findViewById(R.id.itemList_noContent).setVisibility(View.VISIBLE);
                 } else {
-                    orderList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                    productList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
                     productListAdapter = new ProductListAdapter(context, products);
-                    orderList.setAdapter(productListAdapter);
+                    productList.setAdapter(productListAdapter);
                 }
 
                 progressBar.setVisibility(View.GONE);
@@ -70,10 +71,14 @@ public class ProductsFragment extends Fragment {
             }
         });
 
-        orderList.addOnItemTouchListener(new RecyclerTouchListener(context, orderList, new RecyclerTouchListener.ClickListener() {
+        productList.addOnItemTouchListener(new RecyclerTouchListener(context, productList, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
+                Intent intent = new Intent(context, ProductActivity.class);
+                intent.putExtra("id", products.get(position).get_id());
+                intent.putExtra("name", products.get(position).getName());
+                intent.putExtra("price", String.valueOf(products.get(position).getPrice()));
+                startActivity(intent);
             }
 
             @Override

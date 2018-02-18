@@ -71,7 +71,7 @@ public class GelsinActions {
     }
 
     public static void completeOrder(String order_id, ResultHandler resultHandler) {
-
+        Gelsin.client.get("order/complete/" + order_id, null, resultHandler);
     }
 
 }
