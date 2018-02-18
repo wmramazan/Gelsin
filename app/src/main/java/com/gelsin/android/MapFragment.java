@@ -126,8 +126,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 Gson gson = new Gson();
                 nearbyShops = gson.fromJson(result, new TypeToken<ArrayList<ShopItem>>(){}.getType());
 
-                // TODO: 17.02.2018 Add distance attribute to ShopItem
-
                 if(nearbyShops.size() > 0) {
                     for(ShopItem shop : nearbyShops) {
                         markerOptions = new MarkerOptions();
