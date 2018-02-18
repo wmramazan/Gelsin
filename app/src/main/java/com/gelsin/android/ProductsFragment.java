@@ -78,6 +78,7 @@ public class ProductsFragment extends Fragment {
                 intent.putExtra("id", products.get(position).get_id());
                 intent.putExtra("name", products.get(position).getName());
                 intent.putExtra("price", String.valueOf(products.get(position).getPrice()));
+                intent.putExtra("shop_id", String.valueOf(products.get(position).getShop()));
                 startActivity(intent);
             }
 

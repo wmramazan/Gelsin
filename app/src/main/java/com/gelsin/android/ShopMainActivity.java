@@ -87,7 +87,14 @@ public class ShopMainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        fragmentManager.beginTransaction().replace(R.id.shop_main_container, shopOrdersFragment).commit();
+        if(navigationView.getSelectedItemId() == R.id.navigation_orders) {
+            shopOrdersFragment = new ShopOrdersFragment();
+            fragmentManager.beginTransaction().replace(R.id.shop_main_container, shopOrdersFragment).commit();
+        } else {
+            productsFragment = new ProductsFragment();
+            fragmentManager.beginTransaction().replace(R.id.shop_main_container, productsFragment).commit();
+        }
+
         super.onResume();
     }
 }

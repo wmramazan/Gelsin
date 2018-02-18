@@ -49,8 +49,16 @@ public class ProductActivity extends AppCompatActivity {
             
             buttonRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    // TODO: 18.02.2018 Remove product
+                public void onClick(final View view) {
+                    view.setEnabled(false);
+                    progressBar.setVisibility(View.VISIBLE);
+                    GelsinActions.removeProduct(intent.getStringExtra("id"), new ResultHandler() {
+                        @Override
+                        public void handle(String result) {
+                            Toast.makeText(getApplicationContext(), R.string.successful_remove_product, Toast.LENGTH_SHORT);
+                            finish();
+                        }
+                    });
                 }
             });
             buttonRemove.setVisibility(View.VISIBLE);
@@ -95,6 +103,7 @@ public class ProductActivity extends AppCompatActivity {
         if(isEdit) {
             GelsinActions.editProduct(
                     intent.getStringExtra("id"),
+                    intent.getStringExtra("shop_id"),
                     inputName.getText().toString(),
                     Float.parseFloat(inputPrice.getText().toString()),
                     new ResultHandler() {

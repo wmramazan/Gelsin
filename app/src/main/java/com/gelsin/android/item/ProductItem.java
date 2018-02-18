@@ -6,12 +6,13 @@ package com.gelsin.android.item;
 
 public class ProductItem {
 
-    String _id, name;
+    String _id, name, shop;
     float price;
 
-    public ProductItem(String _id, String name, float price) {
+    public ProductItem(String _id, String name, String shop, float price) {
         this._id = _id;
         this.name = name;
+        this.shop = shop;
         this.price = price;
     }
 
@@ -21,6 +22,10 @@ public class ProductItem {
 
     public String getName() {
         return name;
+    }
+
+    public String getShop() {
+        return shop;
     }
 
     public float getPrice() {

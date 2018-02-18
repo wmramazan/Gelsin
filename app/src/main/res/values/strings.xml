@@ -31,6 +31,7 @@
     <string name="successful_order">Your order has been received successfully.</string>
     <string name="successful_new_product">Your product has been added successfully.</string>
     <string name="successful_edit_product">Your product has been edited successfully.</string>
+    <string name="successful_remove_product">Your product has been removed successfully.</string>
     <string name="completed_order">Completed Order</string>
     <string name="waiting_order">Waiting..</string>
 
