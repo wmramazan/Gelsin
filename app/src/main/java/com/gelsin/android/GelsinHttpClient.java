@@ -31,6 +31,7 @@ public class GelsinHttpClient {
     }
 
     public void get(String url, RequestParams params, final ResultHandler resultHandler) {
+        // TODO: 18.02.2018 Error Handling 
         client.get(BASE_URL + url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -62,13 +63,22 @@ public class GelsinHttpClient {
     }
 
     public void post(String url, RequestParams params, final ResultHandler resultHandler) {
-        // TODO: 6.09.2017 Use new method with some requests.
+        // TODO: 18.02.2018 Error Handling
         client.post(BASE_URL + url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String result = new String(responseBody);
-                resultHandler.handle(new String(result));
                 Log.d(TAG, result);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    if(jsonObject.has("data"))
+                        resultHandler.handle(jsonObject.get("data").toString());
+                    else
+                        Toast.makeText(Gelsin.get(), R.string.something_went_wrong, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(Gelsin.get(), R.string.something_went_wrong, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

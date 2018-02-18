@@ -145,7 +145,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         map.addMarker(markerOptions).setTag(shop.get_id());
                     }
                 } else {
-                    Toast.makeText(getContext(), R.string.no_nearby_shops_title, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext().getApplicationContext(), R.string.no_nearby_shops_title, Toast.LENGTH_SHORT).show();
                 }
 
                 progressBar.setVisibility(View.GONE);

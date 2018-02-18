@@ -49,4 +49,13 @@ public class GelsinActions {
         Gelsin.client.post("order", params, resultHandler);
     }
 
+    public static void addProduct(String name, float price, ResultHandler resultHandler) {
+        RequestParams params = new RequestParams();
+        params.put("name", name);
+        params.put("price", price);
+        params.put("shop", SHOP_ID);
+
+        Gelsin.client.post("product", params, resultHandler);
+    }
+
 }
