@@ -56,7 +56,13 @@
         <activity
             android:name=".OrderActivity"
             android:label="@string/shop_products" />
-        <activity android:name=".NewProductActivity" android:parentActivityName=".ShopMainActivity" android:label="@string/add_product"/>
+        <activity
+            android:name=".NewProductActivity"
+            android:label="@string/add_product"
+            android:parentActivityName=".ShopMainActivity" />
+        <activity
+            android:name=".DeliveryActivity"
+            android:label="@string/title_activity_delivery"></activity>
     </application>
 
 </manifest>
