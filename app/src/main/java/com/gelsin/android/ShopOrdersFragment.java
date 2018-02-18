@@ -1,6 +1,7 @@
 package com.gelsin.android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.gelsin.android.adapter.OrderListAdapter;
+import com.gelsin.android.item.CustomerItem;
 import com.gelsin.android.item.OrderItem;
 import com.gelsin.android.util.RecyclerTouchListener;
 import com.gelsin.android.util.ResultHandler;
@@ -36,7 +38,7 @@ public class ShopOrdersFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.list_item, container, false);
         context = getContext();
 
@@ -73,7 +75,12 @@ public class ShopOrdersFragment extends Fragment {
         orderList.addOnItemTouchListener(new RecyclerTouchListener(context, orderList, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
+                Intent intent = new Intent(context, DeliveryActivity.class);
+                CustomerItem customer = orders.get(position).getCustomer();
+                intent.putExtra("customer_name", customer.getName());
+                intent.putExtra("latitude", customer.getLatitude());
+                intent.putExtra("longitude", customer.getLongitude());
+                startActivity(intent);
             }
 
             @Override

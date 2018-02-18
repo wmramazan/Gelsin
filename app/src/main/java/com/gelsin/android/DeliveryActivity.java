@@ -3,6 +3,9 @@ package com.gelsin.android;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,6 +18,8 @@ public class DeliveryActivity extends FragmentActivity implements OnMapReadyCall
 
     private GoogleMap map;
     private Intent intent;
+    private TextView info;
+    private LatLng destination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +27,18 @@ public class DeliveryActivity extends FragmentActivity implements OnMapReadyCall
         setContentView(R.layout.activity_delivery);
 
         intent = getIntent();
+        info = findViewById(R.id.delivery_info);
+
+        destination = new LatLng(
+                intent.getDoubleExtra("latitude", 0),
+                intent.getDoubleExtra("longitude", 0)
+        );
+
+        info.setText(intent.getStringExtra("customer_name"));
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.delivery_map);
         mapFragment.getMapAsync(this);
     }
 
@@ -43,9 +56,11 @@ public class DeliveryActivity extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        map.addMarker(new MarkerOptions().position(destination).title(getString(R.string.destination)));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(destination, 15));
+    }
+
+    public void completeOrder(View view) {
+
     }
 }

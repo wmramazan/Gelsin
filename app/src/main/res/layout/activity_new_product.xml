@@ -58,7 +58,6 @@
             android:textColor="@android:color/white"
             android:textAllCaps="false"
             android:textStyle="bold"
-            android:drawablePadding="10dp"
             android:gravity="center_vertical"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:foreground="?attr/selectableItemBackground"

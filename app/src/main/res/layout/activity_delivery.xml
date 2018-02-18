@@ -1,8 +1,49 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gelsin.android.DeliveryActivity" />
+    tools:context="com.gelsin.android.DeliveryActivity">
+
+    <fragment xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/delivery_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/delivery_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent_background"
+                android:text="@string/detecting_location"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/complete_order"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@drawable/button_blue"
+                android:onClick="completeOrder"/>
+
+        </LinearLayout>
+
+    </fragment>
+
+</LinearLayout>

@@ -58,4 +58,8 @@ public class GelsinActions {
         Gelsin.client.post("product", params, resultHandler);
     }
 
+    public static void completeOrder(String order_id, ResultHandler resultHandler) {
+
+    }
+
 }
