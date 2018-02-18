@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gelsin</string>
+    <string name="nearby_shops">Yakındaki Dükkanlar</string>
+    <string name="map">Harita</string>
+    <string name="shops">Dükkanlar</string>
+    <string name="orders">Siparişler</string>
+    <string name="profile">Profil</string>
+    <string name="no_permission">Yakındaki dükkanları görebilmen için izin vermen gerekiyor.</string>
+    <string name="no_internet">Lütfen internet bağlantını kontrol et.</string>
+    <string name="enable_location_provider">Lütfen konum sağlayıcını etkinleştirin.</string>
+    <string name="detecting_location">Konum belirleniyor..</string>
+    <string name="your_location">Konumun</string>
+    <string name="destination">Varış Noktası</string>
+    <string name="complete_order">Siparişi Tamamla</string>
+    <string name="no_nearby_shops_title">Yakında dükkan yok.</string>
+    <string name="no_nearby_shops_text">Yakınındaki dükkan sahiplerine Gelsin uygulamasını kullanmasını söyleyebilirsin.</string>
+    <string name="no_orders_title">Sipariş yok.</string>
+    <string name="no_customers_orders_text">Harita üzerinden bir dükkan seçerek sipariş verebilirsin.</string>
+    <string name="no_shop_orders_text">Yeni sipariş bekleyebilir ya da ürün ekleyebilirsin.</string>
+    <string name="no_products_title">Ürün yok.</string>
+    <string name="no_products_text">Satmak için ürün ekleyebilirsin.</string>
+    <string name="something_went_wrong">Bir şeyler ters gitti!</string>
+    <string name="shop_management">Dükkan Yönetimi</string>
+    <string name="shop_products">Dükkan Ürünleri</string>
+    <string name="products">Ürünler</string>
+    <string name="no_products">Ürün yok.</string>
+    <string name="amount">Fiyat:</string>
+    <string name="successful_order">Siparişin başarıyla alındı.</string>
+    <string name="completed_order">Tamamlanan Sipariş</string>
+    <string name="waiting_order">Bekleniyor..</string>
+    <string name="product_name">Ürün İsmi</string>
+    <string name="product_price">Ürün Fiyatı</string>
+    <string name="error_product_name">Lütfen ürünün için bir isim gir.</string>
+    <string name="error_product_price">Lütfen ürünün için bir fiyat gir.</string>
+    <string name="title_activity_delivery">Harita</string>
+    <string name="remove_product">Ürünü Kaldır</string>
+    <string name="add_product">Ürün Ekle</string>
+    <string name="edit_product">Ürünü Düzenle</string>
+    <string name="successful_new_product">Ürün başarıyla eklendi.</string>
+    <string name="successful_edit_product">Ürün başarıyla düzenlendi.</string>
+    <string name="successful_remove_product">Ürün başarıyla kaldırıldı.</string>
+</resources>
