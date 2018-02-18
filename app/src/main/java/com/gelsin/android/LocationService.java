@@ -29,7 +29,7 @@ public class LocationService extends Service implements LocationListener {
     public static final String PLACE = "place";
 
     private final String TAG = "LocationService";
-    private final int FREQ = 3 * 1000;
+    private final int FREQ = 5 * 1000;
 
     private LocationManager locationManager;
     private Geocoder geocoder;

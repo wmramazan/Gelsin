@@ -124,7 +124,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void moveCameraToLocation() {
-        map.addMarker(new MarkerOptions().position(position).title(getString(R.string.your_location)));
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
     }
 
@@ -135,6 +134,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         GelsinActions.getNearbyShops(position.latitude, position.longitude, new ResultHandler() {
             @Override
             public void handle(String result) {
+
+                map.clear();
+                map.addMarker(new MarkerOptions().position(position).title(getString(R.string.your_location)));
 
                 Gson gson = new Gson();
                 nearbyShops = gson.fromJson(result, new TypeToken<ArrayList<ShopItem>>(){}.getType());
