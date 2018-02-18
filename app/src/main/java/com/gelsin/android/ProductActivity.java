@@ -5,24 +5,32 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.gelsin.android.util.ResultHandler;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class ProductActivity extends AppCompatActivity {
 
     ActionBar actionBar;
     TextInputLayout inputLayoutName, inputLayoutPrice;
-    EditText inputName, inputPrice;
+    AutoCompleteTextView inputName;
+    EditText inputPrice;
     Button buttonRemove, buttonComplete;
     ProgressBar progressBar;
     Intent intent;
-    boolean isEdit = false;
+    ArrayAdapter<String> arrayAdapter;
+    boolean isEdit = false, isSearching = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +76,35 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addProduct();
+            }
+        });
+
+        inputName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!isSearching) {
+                    isSearching = true;
+                    GelsinActions.searchProduct(charSequence.toString(), new ResultHandler() {
+                        @Override
+                        public void handle(String result) {
+                            isSearching = false;
+                            Gson gson = new Gson();
+                            String[] products = gson.fromJson(result, new TypeToken<String[]>(){}.getType());
+                            arrayAdapter = new ArrayAdapter<String>(ProductActivity.this, android.R.layout.simple_dropdown_item_1line, products);
+                            inputName.setAdapter(arrayAdapter);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
