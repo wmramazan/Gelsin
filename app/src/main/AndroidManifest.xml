@@ -57,7 +57,7 @@
             android:name=".OrderActivity"
             android:label="@string/shop_products" />
         <activity
-            android:name=".NewProductActivity"
+            android:name=".ProductActivity"
             android:label="@string/add_product"
             android:parentActivityName=".ShopMainActivity" />
         <activity

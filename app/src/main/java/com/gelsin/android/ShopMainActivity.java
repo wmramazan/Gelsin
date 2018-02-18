@@ -74,7 +74,7 @@ public class ShopMainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_product:
-                startActivity(new Intent(this, NewProductActivity.class));
+                startActivity(new Intent(this, ProductActivity.class));
                 return true;
 
             default:

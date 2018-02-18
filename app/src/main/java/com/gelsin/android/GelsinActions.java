@@ -58,6 +58,18 @@ public class GelsinActions {
         Gelsin.client.post("product", params, resultHandler);
     }
 
+    public static void editProduct(String product_id, String name, float price, ResultHandler resultHandler) {
+        RequestParams params = new RequestParams();
+        params.put("name", name);
+        params.put("price", price);
+
+        Gelsin.client.post("product", params, resultHandler);
+    }
+
+    public static void removeProduct(String product_id, ResultHandler resultHandler) {
+        Gelsin.client.get("product/remove/" + product_id, null, resultHandler);
+    }
+
     public static void completeOrder(String order_id, ResultHandler resultHandler) {
 
     }

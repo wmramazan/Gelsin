@@ -20,6 +20,8 @@
     <string name="no_products_title">No products</string>
     <string name="no_products_text">You can add products to sell.</string>
     <string name="add_product">Add Product</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="remove_product">Remove Product</string>
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="shop_management">Shop Management</string>
     <string name="shop_products">Shop Products</string>
@@ -28,6 +30,7 @@
     <string name="amount">Amount:</string>
     <string name="successful_order">Your order has been received successfully.</string>
     <string name="successful_new_product">Your product has been added successfully.</string>
+    <string name="successful_edit_product">Your product has been edited successfully.</string>
     <string name="completed_order">Completed Order</string>
     <string name="waiting_order">Waiting..</string>
 
