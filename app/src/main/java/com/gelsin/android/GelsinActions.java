@@ -16,6 +16,7 @@ public class GelsinActions {
     public static final int LIMIT_DISTANCE = 2000;
     public static final String CUSTOMER_ID = "5a880722f36d2866535e368c";
     public static final String SHOP_ID = "5a8802099f9a5628182951b8";
+    public static final String SHOP_NAME = "ArtCafe";
 
     public static void getNearbyShops(double latitude, double longitude, ResultHandler resultHandler) {
         RequestParams params = new RequestParams();

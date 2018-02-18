@@ -27,4 +27,10 @@
     <string name="successful_order">Your order has been received successfully.</string>
     <string name="completed_order">Completed Order</string>
     <string name="waiting_order">Waiting..</string>
+
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Product Price</string>
+    
+    <string name="error_product_name">Please enter a name for your product.</string>
+    <string name="error_product_price">Please enter a price for your product.</string>
 </resources>

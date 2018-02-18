@@ -50,6 +50,7 @@ public class ShopMainActivity extends AppCompatActivity {
 
         actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.shop_management);
+        actionBar.setSubtitle(GelsinActions.SHOP_NAME);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_gelsin);
         actionBar.setElevation(3);
