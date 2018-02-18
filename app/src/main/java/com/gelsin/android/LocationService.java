@@ -50,7 +50,7 @@ public class LocationService extends Service implements LocationListener {
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
         criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
 
         /*
         //noinspection MissingPermission
