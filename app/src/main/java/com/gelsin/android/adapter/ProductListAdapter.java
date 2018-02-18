@@ -50,6 +50,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         notifyItemRangeChanged(index, products.size());
     }
 
+    public void increaseQuantity(int index) {
+        products.get(index).increaseQuantity();
+        notifyItemChanged(index);
+    }
+
+    public void decreaseQuantity(int index) {
+        products.get(index).decreaseQuantity();
+        notifyItemChanged(index);
+    }
+
     @Override
     public int getItemCount() {
         return (null != products ? products.size() : 0);

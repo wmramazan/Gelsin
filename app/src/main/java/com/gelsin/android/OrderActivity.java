@@ -69,13 +69,9 @@ public class OrderActivity extends AppCompatActivity {
                         public void onClick(View view, int position) {
                             shopping_list.add(products.get(position).get_id());
                             amount += products.get(position).getPrice();
+                            productListAdapter.increaseQuantity(position);
 
                             productsAmount.setText(getString(R.string.amount) + " " + String.valueOf(amount));
-                        }
-
-                        @Override
-                        public void onLongClick(View view, int position) {
-
                         }
                     }));
                 }
