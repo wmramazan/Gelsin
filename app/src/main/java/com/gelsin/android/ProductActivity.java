@@ -63,7 +63,7 @@ public class ProductActivity extends AppCompatActivity {
                     GelsinActions.removeProduct(intent.getStringExtra("id"), new ResultHandler() {
                         @Override
                         public void handle(String result) {
-                            Toast.makeText(getApplicationContext(), R.string.successful_remove_product, Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), R.string.successful_remove_product, Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     });
@@ -149,7 +149,7 @@ public class ProductActivity extends AppCompatActivity {
                             progressBar.setVisibility(View.GONE);
                             buttonComplete.setEnabled(true);
 
-                            Toast.makeText(getApplicationContext(), R.string.successful_edit_product, Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), R.string.successful_edit_product, Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
@@ -164,7 +164,7 @@ public class ProductActivity extends AppCompatActivity {
                             progressBar.setVisibility(View.GONE);
                             buttonComplete.setEnabled(true);
 
-                            Toast.makeText(getApplicationContext(), R.string.successful_new_product, Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), R.string.successful_new_product, Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }

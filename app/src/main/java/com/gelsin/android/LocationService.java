@@ -89,7 +89,7 @@ public class LocationService extends Service implements LocationListener {
     public void onProviderDisabled(String s) {
         Log.d(TAG, "onProviderDisabled");
 
-        Toast.makeText(getApplicationContext(), R.string.enable_location_provider, Toast.LENGTH_LONG);
+        Toast.makeText(getApplicationContext(), R.string.enable_location_provider, Toast.LENGTH_LONG).show();
 
         intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
