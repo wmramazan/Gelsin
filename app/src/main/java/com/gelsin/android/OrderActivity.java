@@ -88,12 +88,16 @@ public class OrderActivity extends AppCompatActivity {
 
     }
     
-    public void giveOrder(View view) {
+    public void giveOrder(final View view) {
+        view.setEnabled(false);
+        progressBar.setVisibility(View.VISIBLE);
         if(shopping_list.size() != 0) {
             GelsinActions.giveAnOrder(intent.getStringExtra("shop_id"), shopping_list, new ResultHandler() {
                 @Override
                 public void handle(String result) {
-                    Toast.makeText(getApplicationContext(), R.string.successful_order, Toast.LENGTH_SHORT);
+                    view.setEnabled(true);
+                    progressBar.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(), R.string.successful_order, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
